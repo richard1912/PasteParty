@@ -82,7 +82,6 @@ header h1 {
 .paste-area:focus-within {
     border-color: #ee5a6f;
     background: linear-gradient(135deg, #fff5e6 0%, #ffe5e5 100%);
-    transform: scale(1.01);
     box-shadow: 0 8px 25px rgba(255,107,107,0.4);
 }
 
@@ -168,8 +167,6 @@ header h1 {
 
 .btn-primary:hover:not(:disabled) {
     background: linear-gradient(135deg, #5568d3 0%, #653a7a 100%);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
 }
 
 .btn-secondary {
@@ -180,8 +177,6 @@ header h1 {
 
 .btn-secondary:hover {
     background: linear-gradient(135deg, #7f8c8d 0%, #6c7a7b 100%);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
 }
 
 .btn-danger {
@@ -192,8 +187,6 @@ header h1 {
 
 .btn-danger:hover {
     background: linear-gradient(135deg, #ee5a6f 0%, #dc3545 100%);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
 }
 
 .paste-header {
@@ -322,14 +315,8 @@ header h1 {
     /* transition: left 0.5s; */
 }
 
-.paste-item:hover::before {
-    left: 100%;
-}
-
 .paste-item:hover {
     border-color: #ff6b6b;
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
-    transform: translateY(-5px);
 }
 
 .paste-item-header {
