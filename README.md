@@ -40,10 +40,9 @@ An open source web app which offers easily accesible and persistant storage for 
 ## Usage
 
 ### Creating a Paste
-1. Click in the paste area or press Ctrl+V
-2. Paste your text or image
-3. Click "💾 Save to Party" button
-4. Your paste will appear in the list below
+1. Click in the paste area and press Ctrl+V (Or Click again to begin typing)
+2. Click "💾 Save to Party" button
+4. Your pastes will appear in the list below
 
 ### Viewing Pastes
 - All saved pastes are displayed on the homepage in a list
