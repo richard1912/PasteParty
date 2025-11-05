@@ -51,7 +51,6 @@ An open source web app which offers easily accessible and persistent storage for
 - Image pastes show a thumbnail preview
 
 ### Managing Pastes
-- **Copy**: Click "📋 Copy" on any paste to copy its content to clipboard
 - **Delete**: Click "🗑️ Delete" on any paste to remove it
 - **Delete All**: Click "🗑️ Clear Party" to remove all pastes at once
 
