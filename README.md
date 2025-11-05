@@ -37,47 +37,6 @@ A fun and colorful web application for pasting text and images from your clipboa
    - Navigate to http://localhost:8081
    - Paste text or images using Ctrl+V
 
-## Android Companion App
-
-PasteParty includes a companion Android app that allows you to share text and images directly from your Android device to your PasteParty server.
-
-### Features
-- 📱 **Share from any app** - Share text and images from Gallery, Chrome, Notes, or any app that supports sharing
-- ⚙️ **Simple configuration** - Just set your PasteParty server URL once
-- 🎯 **One-tap sharing** - Select "PasteParty Companion" from the Android share menu
-- 📋 **Automatic posting** - Shared content automatically appears on your PasteParty homepage
-
-### Setup
-
-1. **Build the Android App**
-   - Open the `PasteParty-Companion` folder in Android Studio
-   - Build and install the APK on your Android device
-
-2. **Configure Server URL**
-   - Open the PasteParty Companion app
-   - Enter your PasteParty server URL (e.g., `http://192.168.1.100:8081`)
-   - Tap "Save"
-
-3. **Start Sharing**
-   - Open any app (Gallery, Chrome, Notes, etc.)
-   - Tap the share button
-   - Select "PasteParty Companion" from the share menu
-   - Your content will be sent to PasteParty automatically!
-
-### Requirements
-- Android 7.0 (API 24) or higher
-- PasteParty server running and accessible from your device (same network or public IP)
-
-### Building from Source
-```bash
-cd PasteParty-Companion
-./gradlew assembleDebug
-```
-
-The APK will be generated at: `app/build/outputs/apk/debug/app-debug.apk`
-
-See `PasteParty-Companion/README.md` for more details.
-
 ## Running as Windows Service
 
 To run PasteParty as a Windows service (starts automatically on boot):
@@ -121,6 +80,68 @@ To allow other devices on your local network to access PasteParty:
    ```
 
 **Note:** This script only configures Windows Firewall. If you have other firewall software (Norton, McAfee, etc.), you may need to configure it separately.
+
+## Android Companion App
+
+PasteParty includes a companion Android app that allows you to share text and images directly from your Android device to your PasteParty server.
+
+### Features
+- 📱 **Share from any app** - Share text and images from Gallery, Chrome, Notes, or any app that supports sharing
+- ⚙️ **Simple configuration** - Just set your PasteParty server URL once
+- 🎯 **One-tap sharing** - Select "PasteParty Companion" from the Android share menu
+- 📋 **Automatic posting** - Shared content automatically appears on your PasteParty homepage
+
+### Installation Options
+
+You have two options to get the Android app:
+
+#### Option 1: Download Pre-built APK (Easiest)
+
+1. **Download the latest release**
+   - Go to [GitHub Releases](https://github.com/richard1912/PasteParty/releases)
+   - Download `PasteParty-Companion-v1.0.0-debug.apk` from the latest release
+   - Transfer the APK to your Android device
+
+2. **Install on Android device**
+   - Enable "Install from Unknown Sources" in your Android settings
+   - Open the APK file and install it
+
+#### Option 2: Build from Source
+
+1. **Prerequisites**
+   - Android Studio installed
+   - Android SDK configured
+
+2. **Build the APK**
+   ```bash
+   cd PasteParty-Companion
+   ./gradlew assembleDebug
+   ```
+   The APK will be generated at: `app/build/outputs/apk/debug/app-debug.apk`
+
+3. **Install on device**
+   - Transfer the APK to your Android device
+   - Install it (enable "Install from Unknown Sources" if needed)
+
+### Configuration
+
+1. **Configure Server URL**
+   - Open the PasteParty Companion app on your device
+   - Enter your PasteParty server URL (e.g., `http://192.168.1.100:8081`)
+   - Make sure your server is running and accessible from your device
+   - Tap "Save"
+
+2. **Start Sharing**
+   - Open any app (Gallery, Chrome, Notes, etc.)
+   - Tap the share button
+   - Select "PasteParty Companion" from the share menu
+   - Your content will be sent to PasteParty automatically!
+
+### Requirements
+- Android 7.0 (API 24) or higher
+- PasteParty server running and accessible from your device (same network or public IP)
+
+See `PasteParty-Companion/README.md` for more technical details.
 
 ## Usage
 
