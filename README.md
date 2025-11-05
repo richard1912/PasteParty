@@ -11,10 +11,10 @@ An open source web app which offers easily accesible and persistant storage for 
 
 - ✅ **Paste text or images from clipboard** - Simply paste (Ctrl+V) any text or image content from your clipboard
 - ✅ **Persistent storage** - All pastes are saved to the server and persistently displayed on the homepage
-- ✅ **Copy pastes** - Copy any pasted content back to your clipboard (from another device)
+- ✅ **Copy pastes** - Copy any pasted content back to your clipboard (say, from another device)
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
 - ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme
-- ✅ **Local network access** - Access from any device on your local network (requires firewall configuration)
+- ✅ **Local network access** - Access from any device on your local network (requires firewall configuration). Advertises on 8081 by default.
 - ✅ **Android Companion App** - Share text and images directly from your Android device to PasteParty via the Android share menu
 
 ## Installation
@@ -36,6 +36,30 @@ An open source web app which offers easily accesible and persistant storage for 
 4. **Open your browser**
    - Navigate to http://localhost:8081
    - Paste text or images using Ctrl+V
+
+## Usage
+
+### Creating a Paste
+1. Click in the paste area or press Ctrl+V
+2. Paste your text or image
+3. Click "💾 Save to Party" button
+4. Your paste will appear in the list below
+
+### Viewing Pastes
+- All saved pastes are displayed on the homepage in a list
+- Each paste shows a preview with its creation date
+- Text pastes show the first 200 characters (but all content is saved)
+- Image pastes show a thumbnail preview
+
+### Managing Pastes
+- **Copy**: Click "📋 Copy" on any paste to copy its content to clipboard
+- **Delete**: Click "🗑️ Delete" on any paste to remove it
+- **Delete All**: Click "🗑️ Clear Party" to remove all pastes at once
+
+### Customizing Theme
+- **Random Theme**: Click the 🎨 button in the top right corner to generate a new random pastel gradient background
+- **Theme Persistence**: Your chosen theme is automatically saved to the server and will persist across page refreshes and different devices accessing the same server
+- **Soft Colors**: Themes use modern, soft pastel colors for a pleasant visual experience
 
 ## Running as Windows Service
 
@@ -142,30 +166,6 @@ You have two options to get the Android app:
 - PasteParty server running and accessible from your device (same network or public IP)
 
 See `PasteParty-Companion/README.md` for more technical details.
-
-## Usage
-
-### Creating a Paste
-1. Click in the paste area or press Ctrl+V
-2. Paste your text or image
-3. Click "💾 Save to Party" button
-4. Your paste will appear in the list below
-
-### Viewing Pastes
-- All saved pastes are displayed on the homepage in a list
-- Each paste shows a preview with its creation date
-- Text pastes show the first 200 characters
-- Image pastes show a thumbnail preview
-
-### Managing Pastes
-- **Copy**: Click "📋 Copy" on any paste to copy its content to clipboard
-- **Delete**: Click "🗑️ Delete" on any paste to remove it
-- **Delete All**: Click "🗑️ Clear Party" to remove all pastes at once
-
-### Customizing Theme
-- **Random Theme**: Click the 🎨 button in the top right corner to generate a new random pastel gradient background
-- **Theme Persistence**: Your chosen theme is automatically saved to the server and will persist across page refreshes and different devices accessing the same server
-- **Soft Colors**: Themes use modern, soft pastel colors for a pleasant visual experience
 
 ## Storage
 

@@ -257,7 +257,7 @@ async function loadPastesList() {
 
 function renderPastesList(pastes) {
         if (pastes.length === 0) {
-            pastesList.innerHTML = '<div class="empty-state"><p>🎭 No pastes yet! Start the party by creating your first paste above! 🎭</p></div>';
+            pastesList.innerHTML = '<div class="empty-state"><p>🎭 No pastes yet! Create your first paste above! 🎭</p></div>';
             return;
         }
 
