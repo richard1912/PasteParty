@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paste Party 🎉</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎉 Paste Party 🎉</h1>
+            <p class="subtitle">🎊 Let's paste some fun! Text & images welcome! 🎊</p>
+        </header>
+
+        <div id="app">
+            <div id="create-view" class="view">
+                <div class="paste-area" id="pasteArea">
+                    <div class="paste-placeholder">
+                        <p>✨ Click here or press Ctrl+V to paste ✨</p>
+                        <p class="hint">📝 Text & 🖼️ Images welcome to the party!</p>
+                        <p class="hint">💡 Double click to input text</p>
+                    </div>
+                    <textarea id="textInput" placeholder="🎨 Type or paste your content here..."></textarea>
+                    <div id="imagePreview" class="hidden"></div>
+                </div>
+                <div class="controls">
+                    <button id="saveBtn" class="btn btn-primary" disabled>💾 Save to Party</button>
+                    <button id="clearBtn" class="btn btn-secondary">🧹 Clear</button>
+                </div>
+                
+                <div id="pastes-list-container">
+                    <div class="pastes-header">
+                        <h2>🎈 Party Guests (Saved Pastes)</h2>
+                        <button id="deleteAllBtn" class="btn btn-danger btn-small" disabled>🗑️ Clear Party</button>
+                    </div>
+                    <div id="pastes-list"></div>
+                </div>
+            </div>
+
+            <div id="view-view" class="view hidden">
+                <div class="paste-header">
+                    <button id="newBtn" class="btn btn-secondary">🎉 New Paste</button>
+                    <button id="deleteBtn" class="btn btn-danger">🗑️ Delete</button>
+                </div>
+                <div id="pasteContent"></div>
+            </div>
+        </div>
+
+        <div id="notification" class="notification hidden"></div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
+
+
