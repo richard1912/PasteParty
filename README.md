@@ -1,4 +1,4 @@
-# <img src="public/favicon.svg" alt="" width="32" height="32" style="vertical-align: middle;"> Paste Party 
+# <img src="public/favicon.svg" alt="" width="48" height="48" style="vertical-align: middle; margin-right: 8px;"> Paste Party 
 
 A fun and colorful web application for pasting text and images from your clipboard with persistent storage. Let's paste some fun!
 
