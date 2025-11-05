@@ -3,6 +3,7 @@
 
 An open source web app which offers easily accessible and persistent storage for text and images from your clipboard. Just paste and it's there when and where you need it!
 
+
 ## Screenshot
 
 ![PasteParty Screenshot](capture2.PNG)
@@ -195,11 +196,6 @@ Theme settings are stored in `data/settings.json` and persist across all session
 
 ## Development
 
-### Using push_updates.bat
-- **Double-click** the file or run from command line
-- **Follow prompts** for commit messages
-- **Automatic handling** - Git add, commit, and push to develop branch
-
 ## Project Structure
 
 ```
@@ -214,7 +210,6 @@ PasteParty/
 │   └── README.md        # Android app documentation
 ├── server.js            # Express server
 ├── package.json         # Dependencies
-├── push_updates.bat     # Git push automation
 ├── install-service.ps1  # Windows service installation
 ├── expose-to-lan.ps1    # LAN firewall configuration
 └── README.md            # This file
