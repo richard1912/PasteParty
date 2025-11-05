@@ -1,6 +1,7 @@
 # <img src="public/favicon.svg" alt="" width="48" height="48" style="vertical-align: middle; margin-right: 8px;"> Paste Party 
 
-A fun and colorful web application for pasting text and images from your clipboard with persistent storage. Let's paste some fun!
+
+An open source web app which offers easily accesible and persistant storage for text and images from your clipboard. Just paste and it's there when and where you need it!
 
 ## Screenshot
 
@@ -10,10 +11,9 @@ A fun and colorful web application for pasting text and images from your clipboa
 
 - ✅ **Paste text or images from clipboard** - Simply paste (Ctrl+V) any text or image content from your clipboard
 - ✅ **Persistent storage** - All pastes are saved to the server and persistently displayed on the homepage
-- ✅ **Copy pastes** - Copy any paste content back to your clipboard
+- ✅ **Copy pastes** - Copy any pasted content back to your clipboard (from another device)
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
-- ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme with soft, modern pastel gradients
-- ✅ **Theme persistence** - Your chosen theme is saved on the server and persists across sessions and devices
+- ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme
 - ✅ **Local network access** - Access from any device on your local network (requires firewall configuration)
 - ✅ **Android Companion App** - Share text and images directly from your Android device to PasteParty via the Android share menu
 
