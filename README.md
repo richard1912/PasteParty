@@ -194,7 +194,6 @@ Theme settings are stored in `data/settings.json` and persist across all session
 - `GET /api/settings/theme` - Get the current theme setting
 - `POST /api/settings/theme` - Save a new theme setting
 
-## Development
 
 ## Project Structure
 
