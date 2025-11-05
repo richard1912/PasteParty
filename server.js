@@ -81,7 +81,7 @@ app.get('/api/paste/:id', async (req, res) => {
 app.get('/api/pastes', async (req, res) => {
   try {
     const files = await fs.readdir(DATA_DIR);
-    const pasteFiles = files.filter(file => file.endsWith('.json'));
+    const pasteFiles = files.filter(file => file.endsWith('.json') && file !== 'settings.json');
     
     const pastes = await Promise.all(
       pasteFiles.map(async (file) => {
@@ -123,7 +123,7 @@ app.delete('/api/paste/:id', async (req, res) => {
 app.delete('/api/pastes', async (req, res) => {
   try {
     const files = await fs.readdir(DATA_DIR);
-    const pasteFiles = files.filter(file => file.endsWith('.json'));
+    const pasteFiles = files.filter(file => file.endsWith('.json') && file !== 'settings.json');
     
     await Promise.all(
       pasteFiles.map(async (file) => {
@@ -139,9 +139,130 @@ app.delete('/api/pastes', async (req, res) => {
   }
 });
 
-// Serve index.html for root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Get theme settings
+app.get('/api/settings/theme', async (req, res) => {
+  try {
+    const settingsPath = path.join(DATA_DIR, 'settings.json');
+    
+    try {
+      const data = await fs.readFile(settingsPath, 'utf8');
+      const settings = JSON.parse(data);
+      res.json({ theme: settings.theme || null });
+    } catch (error) {
+      if (error.code === 'ENOENT') {
+        // Settings file doesn't exist yet, return null
+        return res.json({ theme: null });
+      }
+      throw error;
+    }
+  } catch (error) {
+    console.error('Error reading theme settings:', error);
+    res.status(500).json({ error: 'Failed to read theme settings' });
+  }
+});
+
+// Save theme settings
+app.post('/api/settings/theme', async (req, res) => {
+  try {
+    const { theme } = req.body;
+    
+    if (!theme) {
+      return res.status(400).json({ error: 'Theme is required' });
+    }
+
+    // Ensure data directory exists
+    await ensureDataDir();
+
+    const settingsPath = path.join(DATA_DIR, 'settings.json');
+    let settings = {};
+    
+    // Try to read existing settings
+    try {
+      const data = await fs.readFile(settingsPath, 'utf8');
+      settings = JSON.parse(data);
+    } catch (error) {
+      // File doesn't exist, start with empty settings
+      if (error.code !== 'ENOENT') {
+        throw error;
+      }
+    }
+    
+    // Update theme
+    settings.theme = theme;
+    
+    // Save settings with explicit encoding and flush
+    await fs.writeFile(settingsPath, JSON.stringify(settings, null, 2), 'utf8');
+    
+    // Verify it was written correctly
+    try {
+      const verifyData = await fs.readFile(settingsPath, 'utf8');
+      const verifySettings = JSON.parse(verifyData);
+      if (verifySettings.theme !== theme) {
+        console.error('Theme verification failed after write');
+        return res.status(500).json({ error: 'Theme was not saved correctly' });
+      }
+    } catch (verifyError) {
+      console.error('Error verifying theme save:', verifyError);
+      return res.status(500).json({ error: 'Failed to verify theme save' });
+    }
+    
+    res.json({ success: true, theme: theme });
+  } catch (error) {
+    console.error('Error saving theme settings:', error);
+    res.status(500).json({ error: 'Failed to save theme settings' });
+  }
+});
+
+// Serve index.html for root with theme injection
+app.get('/', async (req, res) => {
+  try {
+    // Read the HTML file
+    const htmlPath = path.join(__dirname, 'public', 'index.html');
+    let html = await fs.readFile(htmlPath, 'utf8');
+    
+    // Try to load saved theme
+    const settingsPath = path.join(DATA_DIR, 'settings.json');
+    let theme = null;
+    
+    try {
+      const data = await fs.readFile(settingsPath, 'utf8');
+      const settings = JSON.parse(data);
+      theme = settings.theme;
+    } catch (error) {
+      // Theme file doesn't exist, use default
+      if (error.code !== 'ENOENT') {
+        console.error('Error reading theme:', error);
+      }
+    }
+    
+    // Inject theme directly into body tag if theme exists
+    if (theme) {
+      // Use a more robust replacement that handles any existing body tag attributes
+      // First, try to find and replace the body tag
+      const bodyTagRegex = /<body(\s[^>]*)?>/i;
+      const bodyMatch = html.match(bodyTagRegex);
+      
+      if (bodyMatch) {
+        // Replace the entire body tag with one that includes our theme
+        const escapedTheme = theme.replace(/"/g, '&quot;');
+        const newBodyTag = `<body style="background: ${escapedTheme} !important; background-size: 400% 400% !important;" data-theme-applied="true"${bodyMatch[1] || ''}>`;
+        html = html.replace(bodyTagRegex, newBodyTag);
+      } else {
+        // Fallback: simple replace
+        const escapedTheme = theme.replace(/"/g, '&quot;');
+        html = html.replace(
+          '<body>',
+          `<body style="background: ${escapedTheme} !important; background-size: 400% 400% !important;" data-theme-applied="true">`
+        );
+      }
+    }
+    
+    res.setHeader('Content-Type', 'text/html');
+    res.send(html);
+  } catch (error) {
+    console.error('Error serving index.html:', error);
+    res.status(500).send('Internal server error');
+  }
 });
 
 // Get local IP address

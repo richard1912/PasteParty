@@ -2,12 +2,18 @@
 
 A fun and colorful web application for pasting text and images from your clipboard with persistent storage. Let's paste some fun!
 
+## Screenshot
+
+![PasteParty Screenshot](Capture.PNG)
+
 ## Features
 
 - ✅ **Paste text or images from clipboard** - Simply paste (Ctrl+V) any text or image content from your clipboard
 - ✅ **Persistent storage** - All pastes are saved to the server and persistently displayed on the homepage
 - ✅ **Copy pastes** - Copy any paste content back to your clipboard
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
+- ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme with soft, modern pastel gradients
+- ✅ **Theme persistence** - Your chosen theme is saved on the server and persists across sessions and devices
 - ✅ **Local network access** - Access from any device on your local network (requires firewall configuration)
 
 ## Installation
@@ -93,6 +99,11 @@ To allow other devices on your local network to access PasteParty:
 - **Delete**: Click "🗑️ Delete" on any paste to remove it
 - **Delete All**: Click "🗑️ Clear Party" to remove all pastes at once
 
+### Customizing Theme
+- **Random Theme**: Click the 🎨 button in the top right corner to generate a new random pastel gradient background
+- **Theme Persistence**: Your chosen theme is automatically saved to the server and will persist across page refreshes and different devices accessing the same server
+- **Soft Colors**: Themes use modern, soft pastel colors for a pleasant visual experience
+
 ## Storage
 
 Pastes are stored as JSON files in the `data/` directory. Each paste is saved with:
@@ -100,6 +111,8 @@ Pastes are stored as JSON files in the `data/` directory. Each paste is saved wi
 - Type (text or image)
 - Creation timestamp
 - Unique ID (used internally for management)
+
+Theme settings are stored in `data/settings.json` and persist across all sessions and devices accessing the same server.
 
 ## Technical Details
 
@@ -116,6 +129,8 @@ Pastes are stored as JSON files in the `data/` directory. Each paste is saved wi
 - `GET /api/paste/:id` - Get a specific paste (internal use for copy functionality)
 - `DELETE /api/paste/:id` - Delete a specific paste
 - `DELETE /api/pastes` - Delete all pastes
+- `GET /api/settings/theme` - Get the current theme setting
+- `POST /api/settings/theme` - Save a new theme setting
 
 ## Development
 

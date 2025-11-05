@@ -23,6 +23,15 @@ function init() {
     // Always show create view on homepage
     showCreateView();
 
+    // Load saved theme from server
+    loadSavedTheme();
+
+    // Theme button event listener
+    const themeBtn = document.getElementById('themeBtn');
+    if (themeBtn) {
+        themeBtn.addEventListener('click', changeBackgroundTheme);
+    }
+
     // Event listeners
     pasteArea.addEventListener('paste', handlePaste);
     pasteArea.addEventListener('click', (e) => {
@@ -393,6 +402,119 @@ function showNotification(message, type = 'success') {
     setTimeout(() => {
         notification.classList.add('hidden');
     }, 3000);
+}
+
+async function changeBackgroundTheme() {
+    // Generate soft, modern colors for the gradient
+    const colors = [];
+    const numColors = 5;
+    
+    // Start with a base hue for harmony
+    const baseHue = Math.floor(Math.random() * 360);
+    
+    for (let i = 0; i < numColors; i++) {
+        // Generate soft, pastel-like colors
+        // Vary hue slightly around base for harmony (within 60-120 degree range)
+        const hueVariation = (Math.random() - 0.5) * 80;
+        const hue = (baseHue + hueVariation + 360) % 360;
+        
+        // Softer saturation: 20-45% (pastel range)
+        const saturation = 20 + Math.floor(Math.random() * 25);
+        
+        // Higher lightness: 65-85% (soft, airy feel)
+        const lightness = 65 + Math.floor(Math.random() * 20);
+        
+        // Convert HSL to hex
+        const hslToHex = (h, s, l) => {
+            l /= 100;
+            const a = s * Math.min(l, 1 - l) / 100;
+            const f = n => {
+                const k = (n + h / 30) % 12;
+                const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                return Math.round(255 * color).toString(16).padStart(2, '0');
+            };
+            return `#${f(0)}${f(8)}${f(4)}`;
+        };
+        
+        colors.push(hslToHex(hue, saturation, lightness));
+    }
+    
+    // Create gradient stops
+    const stops = colors.map((color, index) => {
+        const percentage = (index / (numColors - 1)) * 100;
+        return `${color} ${percentage}%`;
+    }).join(', ');
+    
+    // Apply new background with !important to ensure it overrides CSS
+    const gradient = `linear-gradient(135deg, ${stops})`;
+    document.body.style.setProperty('background', gradient, 'important');
+    document.body.style.setProperty('background-size', '400% 400%', 'important');
+    document.body.setAttribute('data-theme-applied', 'true');
+    window.__savedTheme = gradient;
+    
+    // Save to server - ensure it's saved
+    try {
+        const response = await fetch('/api/settings/theme', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ theme: gradient })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to save theme');
+        }
+        
+        // Verify it was saved
+        const verifyResponse = await fetch('/api/settings/theme');
+        if (verifyResponse.ok) {
+            const verifyData = await verifyResponse.json();
+            if (verifyData.theme !== gradient) {
+                console.error('Theme verification failed - theme was not saved correctly');
+            }
+        }
+    } catch (error) {
+        console.error('Error saving theme to server:', error);
+        // Retry once
+        try {
+            await fetch('/api/settings/theme', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ theme: gradient })
+            });
+        } catch (retryError) {
+            console.error('Retry failed to save theme:', retryError);
+        }
+    }
+}
+
+async function loadSavedTheme() {
+    try {
+        // Theme should already be injected by server in HTML, but verify and apply if needed
+        if (document.body.hasAttribute('data-theme-applied')) {
+            // Theme already applied by server injection
+            return;
+        }
+        
+        // Fallback: load theme if not already applied
+        const response = await fetch('/api/settings/theme');
+        if (!response.ok) {
+            return;
+        }
+        
+        const data = await response.json();
+        if (data.theme) {
+            // Apply theme immediately and ensure it persists with !important
+            document.body.style.setProperty('background', data.theme, 'important');
+            document.body.style.setProperty('background-size', '400% 400%', 'important');
+            document.body.setAttribute('data-theme-applied', 'true');
+        }
+    } catch (error) {
+        console.error('Error loading theme from server:', error);
+    }
 }
 
 
