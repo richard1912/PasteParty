@@ -1,7 +1,7 @@
 # <img src="public/favicon.svg" alt="" width="48" height="48" style="vertical-align: middle; margin-right: 8px;"> Paste Party 
 
 
-An open source web app which offers easily accesible and persistant storage for text and images from your clipboard. Just paste and it's there when and where you need it!
+An open source web app which offers easily accessible and persistent storage for text and images from your clipboard. Just paste and it's there when and where you need it!
 
 ## Screenshot
 
