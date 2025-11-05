@@ -51,7 +51,7 @@ app.post('/api/paste', async (req, res) => {
     const filePath = path.join(DATA_DIR, `${id}.json`);
     await fs.writeFile(filePath, JSON.stringify(paste, null, 2));
 
-    res.json({ id, url: `/paste/${id}` });
+    res.json({ id });
   } catch (error) {
     console.error('Error saving paste:', error);
     res.status(500).json({ error: 'Failed to save paste' });
@@ -139,12 +139,8 @@ app.delete('/api/pastes', async (req, res) => {
   }
 });
 
-// Serve index.html for root and paste routes
+// Serve index.html for root
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.get('/paste/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 

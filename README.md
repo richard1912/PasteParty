@@ -1,139 +1,111 @@
-# PasteParty
+# 🎉 PasteParty 🎉
 
+A fun and colorful web application for pasting text and images from your clipboard with persistent storage. Let's paste some fun!
 
+## Features
 
-## 🚀 Getting Started with AI-Driven Development
+- ✅ **Paste text from clipboard** - Simply paste (Ctrl+V) any text content
+- ✅ **Paste images from clipboard** - Supports pasting images directly from clipboard
+- ✅ **Persistent storage** - All pastes are saved to files and accessible via unique URLs
+- ✅ **Fun, colorful party-themed interface** - Bright and cheerful UI
+- ✅ **View saved pastes** - Access any saved paste by its unique ID
+- ✅ **Delete pastes** - Remove individual pastes or delete all at once
+- ✅ **Local and network access** - Runs on your local network for easy access from any device
 
-This project is configured for **Spec-Driven Development** using spec-kit and AI coding assistants. Follow these best practices for optimal results:
+## Installation
 
-### 1. Open in AI Coding Environment
-- **Cursor** with AI features
-- **Claude Code**
-- **GitHub Copilot** 
-- **VS Code** with AI extensions
+1. **Install Node.js** (if not already installed)
+   - Download from https://nodejs.org/
+   - Make sure npm is included
 
-### 2. Start with Specification
-Use the /specify command to define your project:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-`
-/specify "Build a [type] application that [main purpose]. Key features include [feature 1], [feature 2], and [feature 3]. The application should [performance/security requirements]."
-`
+3. **Start the server**
+   ```bash
+   npm start
+   ```
 
-**Best Practices for Specifications:**
-- Be specific about the main purpose and target users
-- Include key features and functionality requirements
-- Mention performance, security, or scalability needs
-- Specify the technology stack if you have preferences
-- Include any design or UX requirements
+4. **Open your browser**
+   - Navigate to http://localhost:8081
+   - Or use the network IP shown in the console for access from other devices
+   - Paste text or images using Ctrl+V
 
-### 3. Create Technical Plan
-Use the /plan command to develop implementation strategy:
+## Usage
 
-`
-/plan "The application will use [tech stack]. Architecture: [frontend/backend structure]. Database: [data storage solution]. Key components: [component 1], [component 2]. Development approach: [methodology]."
-`
+### Creating a Paste
+1. Click in the paste area or press Ctrl+V
+2. Paste your text or image
+3. Click "💾 Save to Party" button
+4. Your paste will appear in the list below
 
-**Best Practices for Planning:**
-- Choose appropriate technology stack
-- Define clear architecture and component structure
-- Plan data models and API design
-- Consider scalability and maintainability
-- Break down into manageable phases
+### Viewing Pastes
+- All saved pastes are displayed on the homepage in a list
+- Each paste shows a preview with its creation date
+- Text pastes show the first 200 characters
+- Image pastes show a thumbnail preview
 
-### 4. Break Down into Tasks
-Use the /tasks command to get actionable development items:
+### Managing Pastes
+- **Copy**: Click "📋 Copy" on any paste to copy its content to clipboard
+- **Delete**: Click "🗑️ Delete" on any paste to remove it
+- **Delete All**: Click "🗑️ Clear Party" to remove all pastes at once
 
-- Review the generated task list
-- Prioritize tasks based on dependencies
-- Estimate effort for each task
-- Assign tasks or work through them systematically
+## Storage
 
-### 5. Implement Features
-Use the /implement command to build specific features:
+Pastes are stored as JSON files in the `data/` directory. Each paste is saved with:
+- Unique ID (8 characters)
+- Content (text or base64-encoded image)
+- Type (text or image)
+- Creation timestamp
 
-`
-/implement specs/001-feature-name/plan.md
-`
+## Technical Details
 
-**Best Practices for Implementation:**
-- Work on one feature at a time
-- Follow the generated specifications closely
-- Test each feature before moving to the next
-- Use version control effectively (you're already on develop branch!)
+- **Port**: 8081 (default)
+- **Backend**: Node.js with Express
+- **Storage**: File-based (JSON files in `data/` directory)
+- **Frontend**: Vanilla JavaScript with a colorful, modern UI
+- **API**: RESTful API for paste operations
 
-## 🔧 Development Workflow
+## API Endpoints
 
-### Daily Development Process
-1. **Start with spec-kit commands** - Define what you're building
-2. **Use AI assistance** - Let AI help with implementation details
-3. **Test frequently** - Ensure each feature works before proceeding
-4. **Commit regularly** - Use push_updates.bat to save progress
-5. **Iterate and refine** - Use /specify to update requirements as needed
+- `POST /api/paste` - Create a new paste
+- `GET /api/paste/:id` - Get a specific paste (used internally for copy functionality)
+- `GET /api/pastes` - Get all pastes
+- `DELETE /api/paste/:id` - Delete a specific paste
+- `DELETE /api/pastes` - Delete all pastes
+
+## Development
 
 ### Using push_updates.bat
 - **Double-click** the file or run from command line
 - **Follow prompts** for commit messages
 - **Automatic handling** - Git add, commit, and push to develop branch
-- **No branch switching needed** - You're already on develop!
 
-### Spec-kit Commands Reference
-- /specify "description" - Define project requirements
-- /plan "strategy" - Create technical implementation plan  
-- /tasks - Generate actionable task list
-- /implement specs/XXX-feature/plan.md - Implement specific features
+## Project Structure
 
-## 📁 Project Structure
-
-`
+```
 PasteParty/
-├── .spec-kit/           # spec-kit configuration
-├── specs/               # Project specifications
-├── plans/               # Technical implementation plans
-├── tasks/               # Task breakdowns
-├── .spec-kit.json       # spec-kit configuration file
-├── push_updates.bat     # Automated push script
+├── data/                 # Stored pastes (JSON files)
+├── public/               # Frontend files
+│   ├── index.html        # Main HTML file
+│   ├── app.js           # Frontend JavaScript
+│   └── style.css        # Styling
+├── server.js            # Express server
+├── package.json         # Dependencies
+├── push_updates.bat     # Git push automation
 └── README.md            # This file
-`
+```
 
-## 🎯 Best Practices for AI Development
+## Requirements
 
-### 1. Be Specific and Detailed
-- Provide clear, detailed specifications
-- Include examples and edge cases
-- Specify error handling requirements
-- Mention testing and validation needs
-
-### 2. Iterate and Refine
-- Start with high-level specifications
-- Refine details as you learn more
-- Update specifications based on implementation insights
-- Use /specify to adjust requirements during development
-
-### 3. Leverage AI Effectively
-- Ask for code reviews and improvements
-- Request explanations for complex concepts
-- Get help with debugging and optimization
-- Use AI for documentation and comments
-
-### 4. Maintain Quality
-- Test each feature thoroughly
-- Follow coding best practices
-- Keep code clean and well-documented
-- Use version control effectively
-
-## 🚀 Next Steps
-
-1. **Open this project in your AI coding environment**
-2. **Start with /specify** - Define your project requirements
-3. **Use /plan** - Create your technical implementation strategy
-4. **Run /tasks** - Get your development roadmap
-5. **Begin implementation** - Use /implement for each feature
-6. **Use push_updates.bat** - Save your progress regularly
+- Node.js 14+
+- npm (comes with Node.js)
 
 ## Repository Information
 
 - **Repository URL**: https://github.com/richard1912/PasteParty.git
-- **Current Branch**: develop (ready for development)
-- **Setup Date**: 2025-11-05 16:07:46
+- **Current Branch**: develop
 
-Happy AI-driven development! 🚀🤖
+Happy pasting! 🎉📋

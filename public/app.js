@@ -6,16 +6,12 @@ let currentType = 'text';
 
 // DOM elements
 const createView = document.getElementById('create-view');
-const viewView = document.getElementById('view-view');
 const pasteArea = document.getElementById('pasteArea');
 const textInput = document.getElementById('textInput');
 const imagePreview = document.getElementById('imagePreview');
 const placeholder = pasteArea.querySelector('.paste-placeholder');
 const saveBtn = document.getElementById('saveBtn');
 const clearBtn = document.getElementById('clearBtn');
-const newBtn = document.getElementById('newBtn');
-const deleteBtn = document.getElementById('deleteBtn');
-const pasteContent = document.getElementById('pasteContent');
 const notification = document.getElementById('notification');
 const pastesList = document.getElementById('pastes-list');
 const deleteAllBtn = document.getElementById('deleteAllBtn');
@@ -24,13 +20,8 @@ const deleteAllBtn = document.getElementById('deleteAllBtn');
 init();
 
 function init() {
-    // Check if we're viewing a paste
-    const pathParts = window.location.pathname.split('/');
-    if (pathParts.length === 3 && pathParts[1] === 'paste') {
-        loadPaste(pathParts[2]);
-    } else {
-        showCreateView();
-    }
+    // Always show create view on homepage
+    showCreateView();
 
     // Event listeners
     pasteArea.addEventListener('paste', handlePaste);
@@ -65,14 +56,10 @@ function init() {
 
     saveBtn.addEventListener('click', savePaste);
     clearBtn.addEventListener('click', clearPaste);
-    newBtn.addEventListener('click', showCreateView);
-    deleteBtn.addEventListener('click', deletePaste);
     deleteAllBtn.addEventListener('click', deleteAllPastes);
     
     // Load pastes list on homepage
-    if (window.location.pathname === '/') {
-        loadPastesList();
-    }
+    loadPastesList();
 }
 
 function handlePaste(e) {
@@ -232,78 +219,12 @@ async function savePaste() {
     }
 }
 
-async function loadPaste(id) {
-    try {
-        const response = await fetch(`${API_BASE}/${id}`);
-        
-        if (!response.ok) {
-            if (response.status === 404) {
-                showNotification('Paste not found', 'error');
-                setTimeout(() => showCreateView(), 2000);
-            }
-            return;
-        }
-
-        const paste = await response.json();
-        currentPasteId = paste.id;
-        currentContent = paste.content;
-        currentType = paste.type;
-
-        // Display the paste
-        if (paste.type === 'image') {
-            pasteContent.className = 'image-content';
-            pasteContent.innerHTML = `<img src="${paste.content}" alt="Pasted image">`;
-        } else {
-            pasteContent.className = 'text-content';
-            pasteContent.textContent = paste.content;
-        }
-
-        showViewView();
-
-    } catch (error) {
-        console.error('Error loading paste:', error);
-        showNotification('Failed to load paste', 'error');
-        setTimeout(() => showCreateView(), 2000);
-    }
-}
-
-async function deletePaste() {
-    if (!currentPasteId) return;
-
-    if (!confirm('Are you sure you want to delete this paste?')) {
-        return;
-    }
-
-    try {
-        const response = await fetch(`${API_BASE}/${currentPasteId}`, {
-            method: 'DELETE'
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete paste');
-        }
-
-        showNotification('🗑️ Paste removed from party!', 'success');
-        setTimeout(() => showCreateView(), 1000);
-
-    } catch (error) {
-        console.error('Error deleting paste:', error);
-        showNotification('Failed to delete paste', 'error');
-    }
-}
-
 function showCreateView() {
     currentPasteId = null;
     createView.classList.remove('hidden');
-    viewView.classList.add('hidden');
     clearPaste();
     loadPastesList();
     window.history.pushState({}, '', '/');
-}
-
-function showViewView() {
-    createView.classList.add('hidden');
-    viewView.classList.remove('hidden');
 }
 
 async function loadPastesList() {
