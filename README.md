@@ -5,7 +5,7 @@ An open source web app which offers easily accessible and persistent storage for
 
 ## Screenshot
 
-![PasteParty Screenshot](capture.PNG)
+![PasteParty Screenshot](capture2.PNG)
 
 ## Features
 
