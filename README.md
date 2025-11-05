@@ -4,13 +4,11 @@ A fun and colorful web application for pasting text and images from your clipboa
 
 ## Features
 
-- ✅ **Paste text from clipboard** - Simply paste (Ctrl+V) any text content
-- ✅ **Paste images from clipboard** - Supports pasting images directly from clipboard
-- ✅ **Persistent storage** - All pastes are saved to files and accessible via unique URLs
-- ✅ **Fun, colorful party-themed interface** - Bright and cheerful UI
-- ✅ **View saved pastes** - Access any saved paste by its unique ID
+- ✅ **Paste text or images from clipboard** - Simply paste (Ctrl+V) any text or image content from your clipboard
+- ✅ **Persistent storage** - All pastes are saved to the server and persistently displayed on the homepage
+- ✅ **Copy pastes** - Copy any paste content back to your clipboard
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
-- ✅ **Local and network access** - Runs on your local network for easy access from any device
+- ✅ **Local network access** - Access from any device on your local network (requires firewall configuration)
 
 ## Installation
 
@@ -30,8 +28,51 @@ A fun and colorful web application for pasting text and images from your clipboa
 
 4. **Open your browser**
    - Navigate to http://localhost:8081
-   - Or use the network IP shown in the console for access from other devices
    - Paste text or images using Ctrl+V
+
+## Running as Windows Service
+
+To run PasteParty as a Windows service (starts automatically on boot):
+
+1. **Run the installation script as Administrator**
+   ```powershell
+   .\install-service.ps1
+   ```
+
+2. **Service Management Commands**
+   ```powershell
+   .\install-service.ps1 -Status    # Check service status
+   .\install-service.ps1 -Start     # Start service
+   .\install-service.ps1 -Stop      # Stop service
+   .\install-service.ps1 -Uninstall # Remove service
+   ```
+
+   Or use Windows Services (`services.msc`) to manage the service.
+
+## Exposing to Local Network (LAN)
+
+To allow other devices on your local network to access PasteParty:
+
+1. **Run the firewall configuration script as Administrator**
+   ```powershell
+   .\expose-to-lan.ps1
+   ```
+
+2. **The script will:**
+   - Create a Windows Firewall rule to allow inbound connections on port 8081
+   - Display your local IP address for network access
+   - Configure access for both Domain and Private network profiles
+
+3. **Access from other devices:**
+   - Use the network IP address shown by the script (e.g., `http://192.168.1.100:8081`)
+   - Or find your IP with: `ipconfig` in Command Prompt
+
+4. **Remove firewall rule (if needed):**
+   ```powershell
+   .\expose-to-lan.ps1 -Remove
+   ```
+
+**Note:** This script only configures Windows Firewall. If you have other firewall software (Norton, McAfee, etc.), you may need to configure it separately.
 
 ## Usage
 
@@ -55,10 +96,10 @@ A fun and colorful web application for pasting text and images from your clipboa
 ## Storage
 
 Pastes are stored as JSON files in the `data/` directory. Each paste is saved with:
-- Unique ID (8 characters)
 - Content (text or base64-encoded image)
 - Type (text or image)
 - Creation timestamp
+- Unique ID (used internally for management)
 
 ## Technical Details
 
@@ -71,8 +112,8 @@ Pastes are stored as JSON files in the `data/` directory. Each paste is saved wi
 ## API Endpoints
 
 - `POST /api/paste` - Create a new paste
-- `GET /api/paste/:id` - Get a specific paste (used internally for copy functionality)
-- `GET /api/pastes` - Get all pastes
+- `GET /api/pastes` - Get all pastes (displayed on homepage)
+- `GET /api/paste/:id` - Get a specific paste (internal use for copy functionality)
 - `DELETE /api/paste/:id` - Delete a specific paste
 - `DELETE /api/pastes` - Delete all pastes
 
@@ -95,6 +136,8 @@ PasteParty/
 ├── server.js            # Express server
 ├── package.json         # Dependencies
 ├── push_updates.bat     # Git push automation
+├── install-service.ps1  # Windows service installation
+├── expose-to-lan.ps1    # LAN firewall configuration
 └── README.md            # This file
 ```
 

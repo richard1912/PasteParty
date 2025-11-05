@@ -303,10 +303,6 @@ function escapeHtml(text) {
 
 // Make deletePasteItem globally accessible for onclick handlers
 window.deletePasteItem = async function(id) {
-    if (!confirm('Are you sure you want to delete this paste?')) {
-        return;
-    }
-
     try {
         const response = await fetch(`${API_BASE}/${id}`, {
             method: 'DELETE'
