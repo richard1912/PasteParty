@@ -15,6 +15,7 @@ A fun and colorful web application for pasting text and images from your clipboa
 - ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme with soft, modern pastel gradients
 - ✅ **Theme persistence** - Your chosen theme is saved on the server and persists across sessions and devices
 - ✅ **Local network access** - Access from any device on your local network (requires firewall configuration)
+- ✅ **Android Companion App** - Share text and images directly from your Android device to PasteParty via the Android share menu
 
 ## Installation
 
@@ -35,6 +36,47 @@ A fun and colorful web application for pasting text and images from your clipboa
 4. **Open your browser**
    - Navigate to http://localhost:8081
    - Paste text or images using Ctrl+V
+
+## Android Companion App
+
+PasteParty includes a companion Android app that allows you to share text and images directly from your Android device to your PasteParty server.
+
+### Features
+- 📱 **Share from any app** - Share text and images from Gallery, Chrome, Notes, or any app that supports sharing
+- ⚙️ **Simple configuration** - Just set your PasteParty server URL once
+- 🎯 **One-tap sharing** - Select "PasteParty Companion" from the Android share menu
+- 📋 **Automatic posting** - Shared content automatically appears on your PasteParty homepage
+
+### Setup
+
+1. **Build the Android App**
+   - Open the `PasteParty-Companion` folder in Android Studio
+   - Build and install the APK on your Android device
+
+2. **Configure Server URL**
+   - Open the PasteParty Companion app
+   - Enter your PasteParty server URL (e.g., `http://192.168.1.100:8081`)
+   - Tap "Save"
+
+3. **Start Sharing**
+   - Open any app (Gallery, Chrome, Notes, etc.)
+   - Tap the share button
+   - Select "PasteParty Companion" from the share menu
+   - Your content will be sent to PasteParty automatically!
+
+### Requirements
+- Android 7.0 (API 24) or higher
+- PasteParty server running and accessible from your device (same network or public IP)
+
+### Building from Source
+```bash
+cd PasteParty-Companion
+./gradlew assembleDebug
+```
+
+The APK will be generated at: `app/build/outputs/apk/debug/app-debug.apk`
+
+See `PasteParty-Companion/README.md` for more details.
 
 ## Running as Windows Service
 
@@ -148,6 +190,9 @@ PasteParty/
 │   ├── index.html        # Main HTML file
 │   ├── app.js           # Frontend JavaScript
 │   └── style.css        # Styling
+├── PasteParty-Companion/ # Android companion app
+│   ├── app/             # Android app source code
+│   └── README.md        # Android app documentation
 ├── server.js            # Express server
 ├── package.json         # Dependencies
 ├── push_updates.bat     # Git push automation
