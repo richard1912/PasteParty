@@ -11,7 +11,7 @@ An open source web app which offers easily accessible and persistent storage for
 
 - ✅ **Paste text or images from clipboard** - Simply paste (Ctrl+V) any text or image content from your clipboard
 - ✅ **Persistent storage** - All pastes are saved to the server and persistently displayed on the homepage
-- ✅ **Copy pastes** - Copy any pasted content back to your clipboard (say, from another device)
+- ✅ **Copy pastes** - Copy any content back to your clipboard (say, from another device)
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
 - ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme
 - ✅ **Local network access** - Access from any device on your local network (requires firewall configuration). Advertises on 8081 by default.
