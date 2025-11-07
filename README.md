@@ -21,7 +21,7 @@ An open source web app which offers easily accessible and persistent storage for
 ## Installation
 
 1. **Install Node.js** (if not already installed)
-   - Download from https://nodejs.org/
+   - Download from https://nodejs.org/en/download
    - Make sure npm is included
 
 2. **Install dependencies**
