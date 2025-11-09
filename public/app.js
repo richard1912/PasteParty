@@ -74,6 +74,11 @@ function init() {
 function handlePaste(e) {
     e.preventDefault();
     
+    // Prevent the paste event from bubbling to both listeners which would duplicate content
+    if (e.target === textInput) {
+        e.stopPropagation();
+    }
+    
     const items = e.clipboardData.items;
     let plainTextFound = false;
     let imageFound = false;
@@ -257,7 +262,7 @@ async function loadPastesList() {
 
 function renderPastesList(pastes) {
         if (pastes.length === 0) {
-            pastesList.innerHTML = '<div class="empty-state"><p>🎭 No pastes yet! Create your first paste above! 🎭</p></div>';
+            pastesList.innerHTML = '<div class="empty-state"><p>🎭 No pastes yet! Start the party by creating your first paste above! 🎭</p></div>';
             return;
         }
 
