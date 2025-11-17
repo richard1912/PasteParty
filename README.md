@@ -131,20 +131,47 @@ You have two options to get the Android app:
 
 #### Option 2: Build from Source
 
-1. **Prerequisites**
-   - Android Studio installed
-   - Android SDK configured
+**Prerequisites:**
 
-2. **Build the APK**
+1. **Java Development Kit (JDK) 17 or higher**
+   - Required for Android development (JRE alone is not sufficient)
+   - Install from: https://adoptium.net/
+   - Set `JAVA_HOME` environment variable to JDK path
+
+2. **Gradle** (optional - will be auto-downloaded)
+   - If not installed, the build process will download Gradle 8.2 automatically
+
+**Build Steps:**
+
+1. **Navigate to the companion app directory**
    ```bash
    cd PasteParty-Companion
+   ```
+
+2. **Generate Gradle wrapper (if needed)**
+   ```bash
+   gradle wrapper
+   ```
+   - Creates `gradlew` (Unix/Mac) and `gradlew.bat` (Windows)
+   - Uses Gradle 8.2 as specified in project configuration
+
+3. **Build the debug APK**
+   ```bash
+   # On Windows
+   .\gradlew.bat assembleDebug
+   
+   # On Unix/Linux/Mac
    ./gradlew assembleDebug
    ```
-   The APK will be generated at: `app/build/outputs/apk/debug/app-debug.apk`
 
-3. **Install on device**
-   - Transfer the APK to your Android device
-   - Install it (enable "Install from Unknown Sources" if needed)
+4. **Find your APK**
+   - Location: `app/build/outputs/apk/debug/app-debug.apk`
+   - Size: ~30MB
+
+5. **Install on device**
+   - Transfer APK to Android device
+   - Enable "Install from Unknown Sources" in Android settings
+   - Open APK and install
 
 ### Configuration
 
