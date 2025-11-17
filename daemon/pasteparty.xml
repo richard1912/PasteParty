@@ -3,9 +3,9 @@
 	<name>PasteParty</name>
 	<description>PasteParty - Clipboard paste application web server</description>
 	<executable>C:\Program Files\nodejs\node.exe</executable>
-	<argument>C:\PasteParty\node_modules\node-windows\lib\wrapper.js</argument>
+	<argument>C:\01-Self-Hosting\PasteParty\node_modules\node-windows\lib\wrapper.js</argument>
 	<argument>--file</argument>
-	<argument>C:\PasteParty\server.js</argument>
+	<argument>C:\01-Self-Hosting\PasteParty\server.js</argument>
 	<argument>--scriptoptions=</argument>
 	<argument>--log</argument>
 	<argument>PasteParty wrapper</argument>
@@ -27,5 +27,5 @@
 		<user>LocalSystem</user>
 		<password></password>
 	</serviceaccount>
-	<workingdirectory>C:\PasteParty</workingdirectory>
+	<workingdirectory>C:\01-Self-Hosting\PasteParty</workingdirectory>
 </service>
