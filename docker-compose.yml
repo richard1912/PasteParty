@@ -1,0 +1,29 @@
+# PasteParty Docker Compose Configuration
+#
+# Quick Start:
+#   docker compose up -d       # Start
+#   docker compose down        # Stop
+#   docker compose restart     # Restart
+#   docker compose logs -f     # View logs
+#
+# Access: http://localhost:8081 or http://YOUR-IP:8081
+
+services:
+  pasteparty:
+    build: .
+    container_name: pasteparty
+    restart: unless-stopped  # Auto-restart on boot
+    ports:
+      - "8081:8081"  # Automatically exposed to LAN via Docker Desktop
+    volumes:
+      # Persist paste data - survives container restarts
+      - ./data:/app/data
+    environment:
+      - NODE_ENV=production
+      - TZ=Australia/Sydney  # Change timezone if needed
+    networks:
+      - pasteparty-network
+
+networks:
+  pasteparty-network:
+    driver: bridge

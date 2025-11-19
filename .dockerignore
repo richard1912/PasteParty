@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+daemon
+install-service.js
+install-service.ps1
+expose-to-lan.ps1
+*.md
+.env
+data

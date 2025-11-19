@@ -15,28 +15,45 @@ An open source web app which offers easily accessible and persistent storage for
 - ✅ **Copy pastes** - Copy any content back to your clipboard (say, from another device)
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
 - ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme
-- ✅ **Local network access** - Access from any device on your local network (requires firewall configuration). Advertises on 8081 by default.
+- ✅ **Local network access** - Access from any device on your local network. Docker setup automatically handles firewall configuration!
 - ✅ **Android Companion App** - Share text and images directly from your Android device to PasteParty via the Android share menu
 
 ## Installation
 
-1. **Install Node.js** (if not already installed)
-   - Download from https://nodejs.org/en/download
-   - Make sure npm is included
+PasteParty runs on Docker Desktop for easy setup and automatic firewall configuration:
 
-2. **Install dependencies**
+1. **Install Docker Desktop** (if not already installed)
+   - Download from https://www.docker.com/products/docker-desktop
+   - Docker automatically handles Windows Firewall rules - no additional configuration needed!
+
+2. **Start PasteParty**
    ```bash
-   npm install
+   docker compose up -d
    ```
 
-3. **Start the server**
-   ```bash
-   npm start
-   ```
+3. **Access your server**
+   - Local: http://localhost:8081
+   - Network: http://YOUR-IP:8081 (automatically accessible on LAN)
+   - Find your IP: Run `ipconfig` in PowerShell
 
-4. **Open your browser**
-   - Navigate to http://localhost:8081
-   - Paste text or images using Ctrl+V
+**Features:**
+- Auto-starts on boot (restart policy: unless-stopped)
+- Data persists in `./data` folder
+- Timezone: Australia/Sydney
+- Automatic Windows Firewall configuration
+- Lightweight Alpine Linux image (~150MB)
+
+## Management Commands
+
+```bash
+docker compose up -d       # Start
+docker compose down        # Stop
+docker compose restart     # Restart
+docker compose logs -f     # View logs
+docker ps                  # Check status
+```
+
+See [DOCKER.md](DOCKER.md) for detailed Docker instructions and troubleshooting.
 
 ## Usage
 
@@ -60,49 +77,23 @@ An open source web app which offers easily accessible and persistent storage for
 - **Theme Persistence**: Your chosen theme is automatically saved to the server and will persist across page refreshes and different devices accessing the same server
 - **Soft Colors**: Themes use modern, soft pastel colors for a pleasant visual experience
 
-## Running as Windows Service
+## Network Access
 
-To run PasteParty as a Windows service (starts automatically on boot):
+**No configuration needed!** Docker Desktop automatically handles Windows Firewall rules when you expose ports. Your PasteParty server is immediately accessible on your LAN at `http://YOUR-IP:8081`.
 
-1. **Run the installation script as Administrator**
-   ```powershell
-   .\install-service.ps1
-   ```
+Find your IP address:
+```powershell
+ipconfig
+```
+Look for "IPv4 Address" under your active network adapter.
 
-2. **Service Management Commands**
-   ```powershell
-   .\install-service.ps1 -Status    # Check service status
-   .\install-service.ps1 -Start     # Start service
-   .\install-service.ps1 -Stop      # Stop service
-   .\install-service.ps1 -Uninstall # Remove service
-   ```
+## Auto-Start on Boot
 
-   Or use Windows Services (`services.msc`) to manage the service.
+PasteParty automatically starts when Docker Desktop starts (configured with `restart: unless-stopped`).
 
-## Exposing to Local Network (LAN)
-
-To allow other devices on your local network to access PasteParty:
-
-1. **Run the firewall configuration script as Administrator**
-   ```powershell
-   .\expose-to-lan.ps1
-   ```
-
-2. **The script will:**
-   - Create a Windows Firewall rule to allow inbound connections on port 8081
-   - Display your local IP address for network access
-   - Configure access for both Domain and Private network profiles
-
-3. **Access from other devices:**
-   - Use the network IP address shown by the script (e.g., `http://192.168.1.100:8081`)
-   - Or find your IP with: `ipconfig` in Command Prompt
-
-4. **Remove firewall rule (if needed):**
-   ```powershell
-   .\expose-to-lan.ps1 -Remove
-   ```
-
-**Note:** This script only configures Windows Firewall. If you have other firewall software (Norton, McAfee, etc.), you may need to configure it separately.
+To ensure Docker Desktop starts on Windows boot:
+1. Open Docker Desktop Settings
+2. Enable "Start Docker Desktop when you log in"
 
 ## Android Companion App
 
@@ -205,11 +196,14 @@ Theme settings are stored in `data/settings.json` and persist across all session
 
 ## Technical Details
 
+- **Platform**: Docker (Alpine Linux + Node.js 20)
 - **Port**: 8081 (default)
 - **Backend**: Node.js with Express
-- **Storage**: File-based (JSON files in `data/` directory)
+- **Storage**: File-based (JSON files in `./data/` directory, persisted via Docker volume)
 - **Frontend**: Vanilla JavaScript with a colorful, modern UI
 - **API**: RESTful API for paste operations
+- **Image Size**: ~150MB
+- **Memory Usage**: ~200MB RAM
 
 ## API Endpoints
 
@@ -226,7 +220,7 @@ Theme settings are stored in `data/settings.json` and persist across all session
 
 ```
 PasteParty/
-├── data/                 # Stored pastes (JSON files)
+├── data/                 # Stored pastes (JSON files) - persisted volume
 ├── public/               # Frontend files
 │   ├── index.html        # Main HTML file
 │   ├── app.js           # Frontend JavaScript
@@ -236,15 +230,17 @@ PasteParty/
 │   └── README.md        # Android app documentation
 ├── server.js            # Express server
 ├── package.json         # Dependencies
-├── install-service.ps1  # Windows service installation
-├── expose-to-lan.ps1    # LAN firewall configuration
+├── Dockerfile           # Docker image definition
+├── docker-compose.yml   # Docker compose configuration
+├── .dockerignore        # Docker build exclusions
+├── DOCKER.md            # Docker quick reference guide
 └── README.md            # This file
 ```
 
 ## Requirements
 
-- Node.js 14+
-- npm (comes with Node.js)
+- Docker Desktop for Windows
+- ~200MB available disk space (for Docker image + data)
 
 ## Repository Information
 
