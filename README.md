@@ -15,16 +15,15 @@ An open source web app which offers easily accessible and persistent storage for
 - ✅ **Copy pastes** - Copy any content back to your clipboard (say, from another device)
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
 - ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme
-- ✅ **Local network access** - Access from any device on your local network. Docker setup automatically handles firewall configuration!
+- ✅ **Local network access** - Access from any device on your local network.
 - ✅ **Android Companion App** - Share text and images directly from your Android device to PasteParty via the Android share menu
 
 ## Installation
 
-PasteParty runs on Docker Desktop for easy setup and automatic firewall configuration:
+PasteParty runs on Docker Desktop for easy setup:
 
 1. **Install Docker Desktop** (if not already installed)
    - Download from https://www.docker.com/products/docker-desktop
-   - Docker automatically handles Windows Firewall rules - no additional configuration needed!
 
 2. **Start PasteParty**
    ```bash
@@ -33,14 +32,13 @@ PasteParty runs on Docker Desktop for easy setup and automatic firewall configur
 
 3. **Access your server**
    - Local: http://localhost:8081
-   - Network: http://YOUR-IP:8081 (automatically accessible on LAN)
+   - Network: http://YOUR-IP:8081 
    - Find your IP: Run `ipconfig` in PowerShell
 
 **Features:**
 - Auto-starts on boot (restart policy: unless-stopped)
 - Data persists in `./data` folder
 - Timezone: Australia/Sydney
-- Automatic Windows Firewall configuration
 - Lightweight Alpine Linux image (~150MB)
 
 ## Management Commands
@@ -79,7 +77,7 @@ See [DOCKER.md](DOCKER.md) for detailed Docker instructions and troubleshooting.
 
 ## Network Access
 
-**No configuration needed!** Docker Desktop automatically handles Windows Firewall rules when you expose ports. Your PasteParty server is immediately accessible on your LAN at `http://YOUR-IP:8081`.
+Your PasteParty server is immediately accessible on your LAN at `http://YOUR-IP:8081`.
 
 Find your IP address:
 ```powershell
