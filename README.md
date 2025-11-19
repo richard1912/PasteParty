@@ -12,10 +12,11 @@ An open source web app which offers easily accessible and persistent storage for
 
 - ✅ **Paste text or images from clipboard** - Simply paste (Ctrl+V) any text or image content from your clipboard
 - ✅ **Persistent storage** - All pastes are saved to the server and persistently displayed on the homepage
+- ✅ **100% Local & Private** - Everything stays on your machine. No cloud, no tracking, no third parties
 - ✅ **Copy pastes** - Copy any content back to your clipboard (say, from another device)
 - ✅ **Delete pastes** - Remove individual pastes or delete all at once
 - ✅ **Random theme cycler** - Click the 🎨 button in the top right corner to randomly change the background color theme
-- ✅ **Local network access** - Access from any device on your local network.
+- ✅ **Local network access** - Access from any device on your local network
 - ✅ **Android Companion App** - Share text and images directly from your Android device to PasteParty via the Android share menu
 
 ## Installation
@@ -191,6 +192,17 @@ Pastes are stored as JSON files in the `data/` directory. Each paste is saved wi
 - Unique ID (used internally for management)
 
 Theme settings are stored in `data/settings.json` and persist across all sessions and devices accessing the same server.
+
+## Privacy & Security
+
+**Your data never leaves your machine.** PasteParty is completely self-hosted and runs locally:
+- ✅ No cloud services or external servers
+- ✅ No analytics or tracking
+- ✅ No internet connection required
+- ✅ All data stored locally in the `./data/` folder
+- ✅ You have full control over your data
+
+Perfect for sensitive information, passwords, code snippets, or anything you want to keep private.
 
 ## Technical Details
 
