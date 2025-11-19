@@ -21,38 +21,107 @@ An open source web app which offers easily accessible and persistent storage for
 
 ## Installation
 
-PasteParty runs on Docker Desktop for easy setup:
+PasteParty runs on Docker Desktop for easy setup. Follow these steps:
 
-1. **Install Docker Desktop** (if not already installed)
-   - Download from https://www.docker.com/products/docker-desktop
+### Step 1: Install Docker Desktop
 
-2. **Start PasteParty**
+1. **Download Docker Desktop**
+   - Visit https://www.docker.com/products/docker-desktop
+   - Click "Download for Windows"
+   - Run the installer and follow the prompts
+   - Restart your computer if prompted
+
+2. **Verify Docker is running**
+   - Look for the Docker whale icon in your system tray (bottom-right of screen)
+   - If it's not there, open Docker Desktop from your Start menu
+
+### Step 2: Download PasteParty
+
+1. **Download this repository**
+   - Click the green "Code" button at the top of this page
+   - Select "Download ZIP"
+   - Extract the ZIP file to a location you'll remember (e.g., `C:\Users\YourName\PasteParty`)
+
+### Step 3: Start PasteParty
+
+1. **Open PowerShell in the PasteParty folder**
+   - Open File Explorer and navigate to your extracted PasteParty folder
+   - Click on the address bar at the top (where it shows the folder path)
+   - Type `powershell` and press Enter
+   - A blue PowerShell window will open
+
+2. **Start the server**
+   - In the PowerShell window, type this command and press Enter:
    ```bash
    docker compose up -d
    ```
+   - Wait 30-60 seconds for Docker to download and start everything
+   - You should see "Container pasteparty Started" ✅
 
-3. **Access your server**
-   - Local: http://localhost:8081
-   - Network: http://YOUR-IP:8081 
-   - Find your IP: Run `ipconfig` in PowerShell
+3. **Access PasteParty**
+   - Open your web browser
+   - Go to: http://localhost:8081
+   - You should see the PasteParty homepage!
 
-**Features:**
-- Auto-starts on boot (restart policy: unless-stopped)
-- Data persists in `./data` folder
-- Timezone: Australia/Sydney
-- Lightweight Alpine Linux image (~150MB)
+### Step 4: Access from Other Devices (Optional)
 
-## Management Commands
+To access from your phone or other computers on your network:
 
+1. **Find your computer's IP address**
+   - In the same PowerShell window, type: `ipconfig`
+   - Look for "IPv4 Address" (example: 192.168.1.100)
+
+2. **Open on any device**
+   - On your phone/tablet/other computer, open a browser
+   - Go to: `http://YOUR-IP:8081` (replace YOUR-IP with the number from step 1)
+   - Example: http://192.168.1.100:8081
+
+**What you get:**
+- Auto-starts when you turn on your computer
+- All data saved in the `data` folder (never lost)
+- No manual firewall setup needed
+- Lightweight and fast (~150MB)
+
+## Managing PasteParty
+
+After installation, you can control PasteParty using these commands. Always run them in PowerShell **in the PasteParty folder**:
+
+### How to open PowerShell in the PasteParty folder:
+1. Open File Explorer
+2. Navigate to your PasteParty folder
+3. Click the address bar at the top
+4. Type `powershell` and press Enter
+
+### Common Commands:
+
+**Stop PasteParty:**
 ```bash
-docker compose up -d       # Start
-docker compose down        # Stop
-docker compose restart     # Restart
-docker compose logs -f     # View logs
-docker ps                  # Check status
+docker compose down
 ```
 
-See [DOCKER.md](DOCKER.md) for detailed Docker instructions and troubleshooting.
+**Start PasteParty again:**
+```bash
+docker compose up -d
+```
+
+**Restart PasteParty:**
+```bash
+docker compose restart
+```
+
+**Check if PasteParty is running:**
+```bash
+docker ps
+```
+Look for a line with "pasteparty" - if you see it, it's running!
+
+**View logs (troubleshooting):**
+```bash
+docker compose logs -f
+```
+Press `Ctrl+C` to exit the logs.
+
+**Need more help?** See [DOCKER.md](DOCKER.md) for detailed Docker instructions and troubleshooting.
 
 ## Usage
 
@@ -78,21 +147,35 @@ See [DOCKER.md](DOCKER.md) for detailed Docker instructions and troubleshooting.
 
 ## Network Access
 
-Your PasteParty server is immediately accessible on your LAN at `http://YOUR-IP:8081`.
+**Good news!** Your PasteParty server is automatically accessible from any device on your home network (phones, tablets, other computers). No configuration needed!
 
-Find your IP address:
-```powershell
-ipconfig
-```
-Look for "IPv4 Address" under your active network adapter.
+### How to access from other devices:
+
+1. **Find your computer's IP address**
+   - Open PowerShell (see instructions above)
+   - Type: `ipconfig` and press Enter
+   - Look for "IPv4 Address" (it will look like: 192.168.1.100)
+
+2. **Access from any device**
+   - On your phone/tablet/other computer, open a web browser
+   - Type: `http://YOUR-IP:8081` (replace YOUR-IP with the number you found)
+   - Example: If your IP is 192.168.1.100, go to `http://192.168.1.100:8081`
+
+**Note:** Both devices must be on the same WiFi network.
 
 ## Auto-Start on Boot
 
-PasteParty automatically starts when Docker Desktop starts (configured with `restart: unless-stopped`).
+Want PasteParty to start automatically when you turn on your computer?
 
-To ensure Docker Desktop starts on Windows boot:
-1. Open Docker Desktop Settings
-2. Enable "Start Docker Desktop when you log in"
+1. **Open Docker Desktop**
+   - Click the Docker whale icon in your system tray (bottom-right)
+   - Click the gear/settings icon ⚙️ at the top
+
+2. **Enable auto-start**
+   - In the "General" tab, check the box: ✅ "Start Docker Desktop when you log in"
+   - Click "Apply & Restart"
+
+Now PasteParty will automatically be available every time you start your computer!
 
 ## Android Companion App
 
