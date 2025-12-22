@@ -166,18 +166,22 @@ class ShareReceiverActivity : AppCompatActivity() {
                     val api = PastePartyApi(serverUrl)
                     api.sendImage(base64Image, object : PastePartyApi.Callback {
                         override fun onSuccess(pasteId: String) {
-                            binding.progressBar.visibility = android.view.View.GONE
-                            binding.statusTextView.text = getString(R.string.success)
-                            binding.closeButton.visibility = android.view.View.VISIBLE
-                            binding.closeButton.setOnClickListener {
-                                finish()
+                            runOnUiThread {
+                                binding.progressBar.visibility = android.view.View.GONE
+                                binding.statusTextView.text = getString(R.string.success)
+                                binding.closeButton.visibility = android.view.View.VISIBLE
+                                binding.closeButton.setOnClickListener {
+                                    finish()
+                                }
+                                Toast.makeText(this@ShareReceiverActivity, getString(R.string.success), Toast.LENGTH_SHORT).show()
                             }
-                            Toast.makeText(this@ShareReceiverActivity, getString(R.string.success), Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onError(error: String) {
-                            binding.progressBar.visibility = android.view.View.GONE
-                            showError(error)
+                            runOnUiThread {
+                                binding.progressBar.visibility = android.view.View.GONE
+                                showError(error)
+                            }
                         }
                     })
                 }
